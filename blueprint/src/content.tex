@@ -5,3 +5,690 @@
 % If you want to split the blueprint content into several files then
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
+
+\section{Axioms of Ordered Rings}
+
+\subsection{Ring Axioms}
+
+\begin{definition}[Ring]\label{ring}
+    A ring $R$ is a set endowed with two binary operations $+ : R \times R \mapsto R$ and $\cdot : R \times R \mapsto R$ satisfying the following axioms:
+\end{definition}
+
+\begin{axiom}[Commutativity of $+$]\label{commu-add}
+    Given $a, b \in R$, $a+b = b+a$.
+\end{axiom}
+
+\begin{axiom}[Associativity of $+$]\label{assoc-add}
+    Given $a, b, c \in R$, $(a+b)+c = a+(b+c)$.
+\end{axiom}
+
+\begin{axiom}[Commutativity of $\cdot$]\label{commu-mult}
+    Given $a, b \in R$, $a \cdot b = b \cdot a$.
+\end{axiom}
+
+\begin{axiom}[Distributivity of $\cdot$ over $+$]\label{assoc-mult}
+    Given $a, b, c \in R$, $(a \cdot b)\cdot c = a \cdot (b \cdot c)$.
+\end{axiom}
+
+\begin{axiom}[Distributivity of $\cdot$ over $+$]\label{dist-mult-over-add}
+    Given $a, b , c \in R$, $a \cdot (b+c) = a \cdot b + a \cdot c$
+\end{axiom}
+
+\begin{axiom}[Additive Identity]\label{add-identity}
+    There exists $0 \in R$ such that for every $a \in R$, $a+0 = a$.
+\end{axiom}
+
+\begin{axiom}[Additive Inverses]\label{add-inverses}
+    For every $a \in R$, there exists $x \in R$ such that $a + x = 0$, and we denote $x = (-a)$. 
+\end{axiom}
+
+\begin{axiom}[Multiplicative Identity]\label{mult-identity}
+    There exists $1 \in R$ such that for every $a \in R$, $a \cdot 1 = a$.
+\end{axiom}
+
+We will sometimes write $ab$ to refer to the value of $a \cdot b$ for notational clarity.
+
+
+
+
+
+\subsection{Order Axioms}
+
+\begin{definition}[Ordered Ring]\label{ordered-ring}
+An ordered ring $O$ is a ring $R$ with a subset $O^+ \subset R$ satisfying the following axioms:
+\end{definition}
+
+\begin{axiom}[Non-Emptiness of $O^+$]\label{positive-nonempty}
+    There exists some element $x \in O^+$.
+\end{axiom}
+
+\begin{axiom}[Positive Additive Closure]\label{pos-add-closure}
+    For any $a, b \in O^+$, $a+b \in O^+$.
+\end{axiom}
+
+\begin{axiom}[Positive Multiplicative Closure]\label{pos-mult-closure}
+     For every $a, b \in O^+$, $a \cdot b \in O^+$.
+\end{axiom}
+
+\begin{axiom}[Trichotomy]\label{trichotomy}
+    For every $a \in O$, exactly one of the following is true: $a \in O^+$, $a = 0$, $(-a) \in O^+$.
+\end{axiom}
+
+\newpage
+\section{Elementary Results in General Rings}
+
+\subsection{Results in Rings}
+
+\begin{theorem}[Local Additive Identities are $0$]\label{local-add-identity-is-0}
+    Given $a, b \in R$, if $a+b = a$ then $b=0$. 
+\end{theorem}
+\begin{proof}
+    Given any such $a$ and $b$, by $\Cref{add-inverses}$ there exists $(a)$ such that $a + (-a) = 0$. Then, we have $(-a) + (a+b) = (-a) + a$. \Cref{assoc-add} gives $( (-a) + a) + b = (-a) + a$. Then, \Cref{commu-add} gives $(-a) + a = a + (-a) = 0$, and substituting gives $0 + b = 0$. Then, $0 + b = b+0 = b$ by \Cref{commu-add} and \Cref{add-identity}, so we have $b=0$ by substitution, completing the proof. 
+\end{proof}
+
+\begin{theorem}[Additive Left Cancellation]\label{add-left-cancel}
+    Given $a, b, b' \in R$, if $a + b = a + b'$, then $b = b'$.
+\end{theorem}
+\begin{proof}
+    Given $a, b, b' \in R$ such that $a+b = a+b'$, there exists $(-a) \in R$ such that $a + (-a) = 0$ by \Cref{add-inverses}. Then, we have $(-a) + a = a + (-a) = 0$ by \Cref{commu-add}. Then, we have $(-a) + (a+b) = (-a) + (a + b')$, and so we have $(-a) + (a+b) = ((-a)+a)+b = 0 + b$ by \Cref{assoc-add} and substitution. Then, $0+b = b+0 = b$ by \Cref{commu-add} and $\Cref{add-identity}$. Substituting again gives $(-a) + (a+b) = b$. The same process shows $(a-) + (a+b') = b'$. Substituting once more gives $b = b'$, as desired.  
+\end{proof}
+
+\begin{theorem}[Additive Inverses are Unique]\label{add-inverse-unique}
+    Given $a, x$ such that $a+ x = 0$, $x$ must be equal to $(-a)$. 
+\end{theorem}
+\begin{proof} If such $a$ and $x$ exist, then there exists $(-a)$ such that $a + (-a) = 0$. Then, we have $(-a) + (a+ x) = (-a) + 0$. Then, by \Cref{assoc-add}, we have $(-a) + (a+x) = ((-a)+a) + x = 0+x = x+0 = x$ and the fact that $(-a)+a = a + (-a) = 0$ by \Cref{commu-add} and \Cref{add-identity}. Also notice $(-a) + 0 = (-a)$. Substituting gives $x = (-a)$, as desired.
+\end{proof}
+
+\begin{theorem}[Inverses of Inverses are the Original]\label{inverse-of-inverse-is-original}
+    $-(-a) = a$ for all $a$. 
+\end{theorem}
+\begin{proof}
+    We have $a + (-a) = 0$ by \Cref{add-inverses}. But \Cref{commu-add} gives $(-a) + a = 0$, so $a$ is a solution to $(-a) + x = 0$. But, the solution to this is uniquely $-(-(a))$ by \Cref{add-inverse-unique}, and so we have $a = -(-a))$. 
+\end{proof}
+
+\begin{theorem}[Multiplication by $0$ is $0$]\label{mult-by-0-is-0}
+    We have $x \cdot 0 = 0$ for all $x \in R$.
+\end{theorem}
+\begin{proof}
+We have $0 + 0 = 0$ by \Cref{add-inverses}, so $0=0+0$ by \Cref{commu-add}. Then, we have $a \cdot (0) = a \cdot (0+0)$, and then $a \cdot 0 = a\cdot 0 + a\cdot 0$ by distributivity. Then, this becomes $a \cdot 0 + a \cdot 0 = a\cdot 0$, and so we have by $\Cref{add-inverse-unique}$ $a \cdot 0= 0$. 
+\end{proof}
+
+\begin{theorem}[Right Distribution of Inverses of Products]\label{right-dist-inverses}
+$-(ab) = a(-b)$.
+\end{theorem}
+\begin{proof}
+There exists $(-(ab))$ such that $ab + (-(ab)) = 0$. Then, there exists $(-b)$ such that $b + (-b) = 0$. Also note $ab + a(-b)) = a(b+(-b)) = a(0) = 0$ by \Cref{dist-mult-over-add}, substitution, and \Cref{mult-by-0-is-0}. Then, by \Cref{add-inverse-unique}, we have $-(ab) = a(-b)$.
+\end{proof}
+
+\begin{theorem}[Left Distribution of Inverses of Products]\label{left-dist-inverses}
+$-(ab) = (-a)b$.
+\end{theorem}
+\begin{proof} Proof follows the same as the prior result, so we neglect to include it. 
+\end{proof}
+
+\begin{theorem}[Inverses Multiply to the Original]\label{inverses-mult-original}
+$(-a)(-b) = ab$
+\end{theorem}
+\begin{proof}
+We have $-((-a)b) = (-a)(-b)$ by \Cref{right-dist-inverses} and $-((-a)b) = ((-(-a))b) = ab$ by \Cref{left-dist-inverses} and \Cref{inverse-of-inverse-is-original}. So, we have $ab = (-a)(-b)$. 
+\end{proof}
+
+\begin{theorem}[Factoring $-1$ from Inverses]\label{factor-neg-1}
+$(-a) = (-1)a$
+\end{theorem}
+\begin{proof}
+$a \cdot 1 = a$ by \Cref{mult-identity}, $-(a \cdot 1) = a \cdot (-1)$ by \Cref{right-dist-inverses}, and substitution gives $-(a) = a \cdot (-1)$. Then, we have $-a = (-1)a$ by \Cref{commu-mult}.
+\end{proof}
+
+\begin{definition}[Subtraction]
+We define an operation $-: R \times R \mapsto R$ such that $a-b$ is the solution to the equation $b+x = a$.
+\end{definition}
+
+\begin{theorem}[Subtraction is Well Defined]\label{sub-well-def}
+$-$ is well-defined, in the sense that $a-b$ always exists and is always unique. 
+\end{theorem}
+\begin{proof}
+First, we show $a+(-b)$ is a solution. Notice that $b + (a+(-b)) = b + ((-b) + a) = (b + (-b)) + a = 0 + a = a + 0 = a$ via application of \Cref{assoc-add}, \Cref{commu-add} and \Cref{add-inverses}. \\
+
+Then, for any given solution to the equation $y$ to the equation $b+x = a$, we show $x = a+(-b)$, showing uniqueness. We have $(-b) + b+x = (-b) + a$, and $(-b) + b + x = ((-b)+b) + x = (b+(-b)) + x = 0 + x$ by \Cref{assoc-add}, \Cref{commu-add}, and \Cref{add-identity}, and similarly $(-b) + a = a + (-b)$ by \Cref{commu-add}, so we have $x = a + (-b)$ for any solution to this equation.
+\end{proof}
+
+\begin{lemma}[Inverse of $0$ is $0$]\label{0-inverse-0}
+    $-0 = 0$.
+\end{lemma}
+\begin{proof}
+    Since $0+0 = 0$ by \Cref{add-identity}, we have $(-0) = 0$ by \Cref{add-inverse-unique}.
+\end{proof}
+
+Note: From this point onwards, it will be assumed that basic arithmetic manipulations are automatic and will not be justified by the axioms in each step. This is for the sake of brevity and clarity of the exposition of this report.
+
+\begin{definition}[Zero Divisors]\label{zero-divisor}
+    Given a ring $R$, an element $a \in R$ such that $a \neq 0$ is said to be a zero divisor if there exists $b \in R$ with $b \neq 0$ such that $ab = 0$.
+\end{definition}
+
+\begin{definition}[Integral Domain]\label{def-int-dom}
+    A ring $R$ is said to be an integral domain if it has no zero divisors.
+\end{definition}
+
+\begin{theorem}[Local Identities are One in an Integral Domain]\label{local-identity-one-in-int-dom}
+In an integral domain, every local identity is $1$ in the sense that if $a \cdot b = a$ for $a \neq 0$ for any $b$, we have $b=1$.
+\end{theorem}
+\begin{proof}
+    We have $ab = a$, and $a(b-1) = ab - a = a - a = 0$. Then, since $a, b$ are in an integral domain, $a(b-1) = 0$ implies $a = 0$ or $b-1 = 0$ by \Cref{def-int-dom}. But, $a \neq 0$, so we have $b-1 = 0$ and therefore $b = 1$. 
+\end{proof}
+
+\begin{theorem}[Cancellation in Integral Domains]\label{mult-cancel-in-int-dom}
+    In an integral domain, if $a \neq 0$ and $ab = ab'$, then $ b= b'$. 
+\end{theorem}
+\begin{proof}
+    If $ab = ab'$ and $a \neq 0$, then $ab - ab' = 0$. But, $ab = ab' = a(b-b') = 0$, and since $a, b, b'$ are in an integral domain, this implies $b-b' = 0$, implying $b = b'$. 
+\end{proof}
+
+\begin{lemma} [Linearity Property]  \label{linearity}
+    Let there exist $a$, $b$ in $\ZZ$ such that 
+    \[n=ax+by\]
+    for some $x$, $y$ in $\ZZ$. Let $d$ be an element in $\ZZ$, if $d \mid a$ and $d \mid b$, then $d \mid n$.
+\end{lemma}
+\begin{proof}
+    Let there exist $d$ such that $d \mid a$ and $d \mid b$. By definition, $d \mid a$ implies that there exists $t_1 \in \ZZ$ such that $a=dt_1$. Similarly, $d \mid b$ implies that there exists $t_2 \in \ZZ$ such that $b=dt_2$. Substituting these into $n=ax+by$, we have $n=(dt_1)x+(dt_2)y = d(t_1x) + d(t_2y) = d(t_1x+t_2y)$, and so by definition $d \mid n$. 
+\end{proof}
+
+
+
+\subsection{Results in Ordered Rings}
+
+\begin{lemma}[$0$ is not positive]\label{0-nonpos}
+    $0 \notin O^+$.
+\end{lemma}
+\begin{proof}
+    We have $0 = 0$, so $0 \notin O^+$ as $0 =0$ and by \Cref{trichotomy} exactly one of $0 \in P$, $0 =0$, and $(-0) \in P$ is true.
+\end{proof}
+
+\begin{theorem}[$0 \neq 1$ in Ordered Rings]\label{0-neq-1}
+    $0 \neq 1$.
+\end{theorem}
+\begin{proof}
+Assume $0 = 1$. Then, $0+0 = 1+0 = 1$, so we have $a(1+0) = a (0+0)$. Then, $a(1+0) = a \cdot 1 + a \cdot 0 = a + 0 = a$ and $a(0+0) = a(0) = 0$, so we see $a =0$ for all $a \in O$. But, since $0 \notin O^+$, this means that $O^+$ is empty. But, by  \Cref{positive-nonempty}, $O^+$ is nonempty, a contradiction. Therefore, $0 \neq 1$.
+\end{proof}
+
+\begin{theorem}[$1$ is positive]\label{1-pos}
+    $1 \in P$ and $(-1) \notin P$.
+\end{theorem}
+\begin{proof}
+    Assume $(-1) \in P$. Then, we have $(-1) \cdot (-1) = 1\in P$ by \Cref{pos-mult-closure}, a contradiction of trichotomy. Therefore, $(-1) \notin P$. So, we must have either $1 \in P$ or $1=0$. The latter is not possible, so we have $1 \in P$.  
+\end{proof}
+
+\begin{definition}[Less Than and Less Than or Equals to]\label{def-le-and-leq}
+    We say $a < b$ if $b-a \in P$. We say $a \le b$ if $b \nless a$. 
+\end{definition}
+
+\begin{theorem}[Less Than or Equals to implies Less Than or Equal]\label{leq-le-or-eq}
+    $a \le b$ implies $a<b$ or $a= b$.
+\end{theorem}
+\begin{proof}
+    If $a \le b$, then $b \nless a$, so $b-a \notin P$. Then, either $a-b = 0$ or $-(a-b) = b-a \in P$. If $a-b=0$, then $a=b$. Otherwise, $a-b \in P$, meaning $a<b$. 
+\end{proof}
+
+\begin{theorem}[Less Than or Equals to is Transitive]\label{leq-transitive}
+    $\le$ is transitive, meaning $a\le b$ and $b \le c$ implies $a \le c$.
+\end{theorem}
+\begin{proof}
+We have $a<b$ or $a=b$ and $a<c$ or $a \le c$. Now, there are four cases. Firstly, $a<b$ and $b < c$. Then, $b-a \in P$ and $c-b \in P$ by \Cref{def-le-and-leq}, so adding these gives $c-b + b-a = c-a \in P$ by \Cref{pos-mult-closure}. Therefore, $-(c-a) = a-c \notin P$ by \Cref{trichotomy}, so $c \nless a$ and therefore $a \le c$. All other cases follow in the same manner (but utilizing direct substitution of equals instead of positive multiplicative closure), so we neglect to include them.
+\end{proof}
+
+
+\begin{theorem}[Addition Compatible with Less-Than or Equals]\label{add-compatible-leq}
+$a \le b$ and $x \le y$ implies $a+x \le b+y$ and $ax \le by$
+\end{theorem}
+\begin{proof}
+$a < b$ or $a\le b$ and $x < y$ or $x \le y$. We divide this into four cases. \\
+
+Case 1: $a < b$ and $x < y$. We have $b-a \in P$ and $y-x \in P$, so $b-a + (y-x) = (b+y)-(a+x) \in P$ by \Cref{pos-add-closure}, so we have $-((b+y)-(a+x)) = (a+x) - (b+y) \notin P$ and therefore $b+y \nless a+x$ and so $a+x \le b+y$. \\
+
+All other cases follow similarly (but with direct substitution with equals instead of applying positive multiplicative closure), so we neglect to include them for brevity.
+\end{proof}
+
+\begin{theorem}[Multiplication of Positives Compatible with Less-Than or Equals]\label{pos-mult-compatible-leq}
+When $a, b, x, y \in O^+$, then $a \le b$ and $x \le y$ implies $ax \le by$.
+\end{theorem}
+\begin{proof}
+We have $a < b$ or $a = b$ and $x < y$ or $x=y$ by \Cref{leq-le-or-eq}. So, we have four cases. \\
+
+Case 1: $a<b$ and $x<y$. Then, we have $b-a \in P$, $y-x \in P$. So, we have $x(b-a) = bx-xa \in P$ by \Cref{pos-mult-closure}, and similarly $b(y-x) = yb - bx \in P$ by \Cref{pos-mult-closure}. So, we get $yb-bx + bx - xa = by - ax \in P$ by \Cref{pos-mult-closure}, and so $-(by-ax) = ax-by \notin P$ by \Cref{trichotomy}, and therefore $by \nless ax$ and so $ax \le by$. \\
+
+Case 2: $a < b$, $x=y$. We have $b-a \in P$, so $(b-a)x = bx - ax = by - ax \in P$ by \Cref{pos-mult-closure}, and so $-(by-ax) = ax-by \notin P$ by \Cref{trichotomy}, and therefore $by \nless ax$ and therefore $ax \le by$. \\
+
+Case $3$: $a = b$, $x < y$. This is symmetric to case $2$ since the only thing that has changed is the order of the equals and $<$ relations, and so the result is achieved by symmetry. \\
+
+Case $4$: $a = b$, $x =y$. This gives $ax = bx = by$, and so we have $ax - by = 0 \notin P$, so $by \nless ax$ and so $ax \le by$. 
+\end{proof}
+
+\begin{theorem}[Ordered Rings are Integral Domains]\label{ordered-rings-int-dom}
+Any ordered ring $O$ is an integral domain.
+\end{theorem}
+\begin{proof}
+    We show the contrapositive of a set being an integral domain (meaning if $ab = 0$, $a$ or $b$ is $0$): if $a, b \neq 0$, then $ab \neq 0$ to prove this. \\
+
+    By \Cref{trichotomy}, if $a,b \neq 0$, then either $a \in P$ or $(-a) \in P$ and $b \in P$ or $(-b) \in P$. We have $4$ cases: \\
+    
+    Case 1: $a \in P, b \in P$. Then, $ab \in P$ by \Cref{pos-mult-closure}, and so by \Cref{trichotomy}, $ab \neq 0$. \\
+    
+    Case 2: $a \in P, b \notin P$. Then, $b \neq 0$, so $-b \in P$ by \Cref{trichotomy}. Therefore, we have $a(-b) = -(ab) \in P$ by \Cref{pos-mult-closure}, and so $ab \neq 0$ by \Cref{trichotomy}. \\
+    
+    Case 3: $a \notin P, b \in P$. By symmetry with case $2$ (the order is merely flipped), we get that $ab \neq 0$ again. \\
+    
+    Case 4: $a \notin P, b \notin P$. then, $a, b \neq 0$, so $(-a), (-b) \in P$ by \Cref{pos-mult-closure}. Then, $(-a)(-b) = ab \in P$, so $ab \neq 0$ by \Cref{trichotomy}. \\
+
+    In all four cases, the statement holds, completing the proof.
+\end{proof}
+
+\begin{corollary}
+An ordered ring $O$ has cancellation and any local identity is necessarily $1$.
+\end{corollary}
+
+\begin{proof}
+    This follows from \Cref{mult-cancel-in-int-dom} and \Cref{local-identity-one-in-int-dom}. 
+\end{proof}
+
+    
+\newpage
+
+\section{Elementary Results in $\ZZ$}
+
+\subsection{Well-Ordering Axiom and Definition of $\ZZ$}
+\begin{definition}[Definition of Integers] \label{def-of-Z}
+     The set $\ZZ$ is an ordered ring satisfying the Well-Ordering Axiom, as stated below. We say elements of $\ZZ$ are integers and elements of $\ZZ^+$ are positive integers.
+\end{definition}
+
+\begin{axiom}[The Well-Ordering Principle (WOP)]\label{well-ordering}
+     For any $S \subseteq \ZZ^+$ such that $S \neq \emptyset $, there exists $n \in S$ such that for all $s \in S$, $n \leq s$. 
+\end{axiom}
+
+\begin{theorem} [Generalized WOP]\label{gen_wop}
+Bounded sets of integers have a greatest and least element in the following sense:
+\begin{enumerate}
+    \item Let $S \subseteq \mathbb{Z}, S \neq \emptyset$. If there exists some $x \in \mathbb{Z}$ such that $x \leq s$ for all $s \in S$, then there exists some $n \in S$ such that for all $s \in S$, $n \leq s$.
+
+    \item Let $S \subseteq \mathbb{Z}, S \neq \emptyset$. If there exists some $x \in \mathbb{Z}$ such that $x \geq s$ for all $s \in S$, then there exists some $n \in S$ such that for all $s \in S$, $n \geq s$.
+\end{enumerate}
+\end{theorem}
+\begin{proof} 
+We handle each case separately.
+\begin{enumerate} 
+    \item Let $S \subseteq \mathbb{Z}, S \neq \emptyset$, and suppose there exists some $x \in \mathbb{Z}$ such that for all $s \in S$, $x \leq s$. Let $S' = \{(s - x)+1 \mid s \in S\}$. Since $x \leq s$, $x - x \leq s - x$. This implies $0 \leq s - x$, which further implies  $0+1 \leq (s - x)+1$, or $1 \leq (s - x)+1$. Therefore, for all $s' \in S', s'\in \ZZ^+$. As $S' \neq \emptyset$, by WOP, $S'$ has a least element $t'=(t-x)+1$ for some $t\in S$. Thus, $(t - x)+1 \leq (s-x)+1$ for all $s \in S$, which implies $t - x \leq s - x$  for all $s \in S$. Hence $t \leq s$ for all $s \in S$, so $t$ is the least element in $S$.
+    
+    \item Let $S \subseteq \mathbb{Z}, S \neq \emptyset$, and suppose there exists some $x \in \mathbb{Z}$ such that for all $s \in S$, $x \geq s$. Let $S' = \{- s \mid s \in S\}$. Since $(-x)\leq(-s)$, by  Generalized WOP 1, $S'$ has a least element $t' $ such that for all $s' \in S$, $t'\leq s'$ Thus, $(-t') \geq (-s')$ for all $s' \in S$, so $(-t') \geq s$ for all $s \in S$. We know that $-t'=t$, and $t \in S$, so we have $t \leq s$ for all $s \in S$, implying that t is the greatest element in $S$.
+\end{enumerate}
+\end{proof}
+
+\subsection{Results in $\ZZ$}
+
+\begin{definition}[Sequences]\label{sequence} A sequence $\{ a_i \}$ over a set $Y$ is a function from a subset $X \subset \mathbf{Z}_{\ge 0}$ to another set $Y$ such that if $x \in X$, then there exists $y \in Y$ such that $a(x) = y$. We write $a_x = a(x)$.
+\end{definition}
+
+\begin{definition}[Finite Sequences]\label{finite_sequence} A sequence $\{ a_i \}$ over a set $S$ is finite if there exists $n$ such that for some $x \ge n$, $x \notin X$.
+\end{definition}
+
+\begin{definition}[Ordered Sequences]\label{ordered_sequence}
+    An ordered sequence is a sequence $\{ a_i \}$ such that $a_i\leq a_j$ if $i\leq j$.
+\end{definition}
+
+\begin{definition}[Divisor] \label{divisor}
+\noindent Let $n \in \mathbb{Z}, a \in \mathbb{Z}$. We call $n$ a \textit{"divisor"} of $a$ if there exists some $m \in \mathbb{Z}$ such that $a = mn$. If $n$ is a divisor of $a$, then we say $n$ \textit{divides} $a$, and denote this as $n \mid a$.
+\end{definition}
+
+\begin{definition}[Primes]\label{def_prime}
+    A prime is an integer greater than $1$ with only two positive divisors: $1$ and itself. 
+\end{definition}
+
+\begin{definition}[Composites]\label{def_composite}
+    We say an integer greater than $1$ is composite if it is not prime.
+\end{definition}
+
+\begin{lemma}[Integers greater than 1 have at least 2 divisors]\label{atleast2divisors}
+    Every integer greater than $1$ has at least two divisors.
+\end{lemma}
+\begin{proof}
+    By \Cref{mult-identity}, any integer $a>1$ has $a=a\cdot 1$, so $a$ and $1$ are two distinct divisors of $a$ because $a>1$.
+\end{proof}
+
+\begin{lemma}[Every composite number has more than $2$ Divisors]
+    Every composite number has more than two divisors.
+\end{lemma}
+
+\begin{proof}
+    By \Cref{atleast2divisors}, a composite number has at least two divisors. A composite number does not have exactly two divisors because it is not prime. Thus, a composite number $a$ has more than two divisors, indicating there exist $x,y\in\ZZ^+$ and $x,y\neq 1,a$ such that $a=xy$.
+\end{proof}
+
+\begin{lemma}[Every positive integer $>1$ has a Prime Divisor]\label{every_has_prime_divisor}
+    Every positive integer greater than 1 has at least one prime divisor. 
+\end{lemma}
+\begin{proof}
+    Define set $S=\left\{k\mid k>1, \nexists \text{ prime } p \text{ such that } x=pq, q\in\ZZ  \right\}$. Suppose towards a contradiction that $S$ is nonempty. By WOP, there exists a least element $k_0$. We know $k_0$ is not prime because a prime number has a prime divisor of itself, so $k_0$ is composite by definition of composite (\Cref{def_composite}). Thus, there exists $x,y\in\ZZ^+$ such that $k_0=xy$ and $x,y\neq 1,k_0$. By \Cref{a_div_b_then_a_leq_b}, $x,y\leq k_0$ and since $x,y\neq k_0$, we know $x,y<k_0$. Thus, $x,y\notin S$ and thus $x,y$ have a prime divisor. Suppose $x=pq$ where $p$ is prime, then $k_0=xy=pqy$ which indicates $k_0$ has a prime divisor, contradicting with $k_0\in S$. Thus, we conclude $S$ is empty and all integers greater than 1 has a prime divisor.
+\end{proof}
+
+\begin{theorem}[No Integer Between Zero and One (NIBZO)] \label{nibzo}
+    There does not exist $n \in \ZZ$ such that $0 < n < 1$.
+\end{theorem}
+\begin{proof}
+    Let there exist a set $S$ containing non-negative integers $n$ such that 
+     \[S=\{ n \in \ZZ \mid 0 < n < 1\}\]
+    Since $S$ is non-negative and nonempty, by WOP, it has a least element $n_0$. So that
+    \[0<n_0<1\]
+    Multiplying both sides by $n_0$, we have
+    \[0 \cdot n_0<n_0 \cdot n_0<1 \cdot n_0\]
+    which simplifies to
+    \[0 <n_0 \cdot n_0<n_0 <1\]
+    by \Cref{mult-identity} and \Cref{mult-by-0-is-0}. Therefore, $n_0 \cdot n_0$ is smaller than $n_0$ and in $S$, so $n_0$ is not the least element. This is a contradiction, so $S$ must be empty. Hence, there does not exist an integer between 1 and 0.
+\end{proof}
+
+\begin{lemma} \label{a_div_b_then_a_leq_b}
+    If $a$, $b$ are in $\ZZ$, where $a \neq 0$, $b \geq 0$, and $a \mid b$, then $a \leq b$.  
+\end{lemma}
+
+\begin{proof}
+    Suppose $a \leq 0$, then $a \leq b$ by definition.
+    \newline
+    Suppose $a >0$, $a \mid b$ implies that there exists $t \in \ZZ$ such that
+    \[b=a \cdot t\]
+    by \Cref{mult-identity}, this implies
+    \[1 \cdot b=a \cdot t\]
+    If $a>b$ and $t>1$ 
+    \[a \cdot t > b \cdot 1\]
+    but by \Cref{pos-mult-compatible-leq}, this is not possible, so $t<1$, since $t=1$ implies $a=b$, which contradicts our assumption. Moreover, since $a,b \in \ZZ^+$, $t \in \ZZ^+$ by \Cref{pos-mult-closure} and \Cref{trichotomy}. This implies that
+    \[0<t<1\]
+    which is not possible by \Cref{nibzo} since $t \in \ZZ$. Therefore, since $a$ cannot be greater than $b$, by \Cref{pos-mult-compatible-leq}, $a \leq b$.
+\end{proof}
+
+\begin{definition}[Product Notation]\label{def_product_notation}
+    We define the product over a sequence $\left\{a_i \right\}$ between indices $1\leq n<m$ to be
+    \begin{equation*}
+        \begin{aligned}
+            \prod_{i=n}^n &a_i=a_n\\
+            \prod_{i=n}^m &a_i=\left( \prod_{1=n}^{m-1} a_i \right) \cdot a_m \qquad (m>n).
+        \end{aligned}
+    \end{equation*}
+\end{definition}
+
+\begin{corollary}[Positive Integers are Greater Than 0]\label{pos-geq-0}
+    Given any $n \in \mathbf{Z}^+$, $n > 0$.
+\end{corollary}
+
+\begin{lemma}[Splitting on the Left]\label{prod_split_from_start}
+    Given a sequence $\left\{ a_i \right\}$ with indices $1\leq n<m$.
+    \begin{equation*}
+        \prod_{i=n}^m a_i = a_{n} (\prod_{i=n+1}^m a_i).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Define the set $S=\left\{ k\mid k>n, \prod_{i=n}^k a_i \neq a_n \left( \prod_{i=n+1}^k a_i \right) \right\}$. Suppose for the sake of contradiction that $S$ is nonempty. By WOP, there exists a least element $k_0\in S$. 
+
+    We know $k_0\neq n+1$ by \Cref{def_product_notation}, $\prod_{i=n}^{n+1} a_i=\left(\prod_{i=n}^n a_i\right) a_{n+1}=a_n \left(\prod_{i=n+1}^{n+1} a_i\right) $. Thus, $k_0-1>n$ and $k_0-1 \not\in S$ implies
+    \begin{equation*}
+        \prod_{i=n}^{k_0-1} a_i = a_n \left(\prod_{i=n+1}^{k_0-1} a_i\right)
+    \end{equation*}
+    Multiplying both sides by $a_{k_0}$, we have
+    \begin{equation*}
+        \begin{aligned}
+            \left( \prod_{i=n}^{k_0-1} a_i \right) a_{k_0}&= a_n \left( \prod_{i=n+1}^{k_0-1} a_i \right) a_{k_0}\\
+            \prod_{i=n}^{k_0} a_i &= a_n \left( \prod_{i=n+1}^{k_0} a_i \right)\\
+        \end{aligned}
+    \end{equation*}
+    which contradicts the fact that $k_0 \in S$. Thus, we must have that $S$ is empty and for all $1\leq n<m$, $\prod_{i=n}^m a_i = a_{n} \left(\prod_{i=n+1}^m a_i \right)$.
+\end{proof}
+
+\begin{lemma}[General Splitting of Product]\label{prod_split_from_middle}
+    Given a sequence $\left\{ a_i \right\}$ and indices $n\leq k< m$.
+    \begin{equation*}
+        \prod_{i=n}^m a_i=\left(\prod_{i=n}^{k} a_i\right) \left(\prod_{j=k+1}^m a_j\right).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Consider the set $S=\left\{ k\mid (\prod_{i=n}^m a_i) \neq \left(\prod_{i=n}^{k} a_i\right) \left(\prod_{j=k+1}^m a_j\right), n\leq k<m \right\}$. Suppose for the sake of contradiction that $S$ is nonempty. By WOP, there exists a least element $k_0$. We know $k_0\neq n$ because
+    \begin{equation*}
+            \prod_{i=n}^m a_i=a_n \left( \prod_{i=n+1}^m a_i \right) 
+            = \left( \prod_{i=n}^n a_i \right) \left( \prod_{j=n+1}^m a_j \right)=\left( \prod_{i=n}^{k_0} a_i\right) \left(\prod_{j=k_0+1}^m a_j\right) \qquad \text{by \Cref{prod_split_from_start}}.
+    \end{equation*}
+    Thus, $k_0-1\geq n$ and $k_0-1\notin S$ implies $\prod_{i=n}^m a_i = \left(\prod_{i=n}^{k_0-1} a_i\right)\left(\prod_{j=k_0}^m a_j\right)$. Yet, rearranging the equation, we have
+    \begin{equation*}
+        \begin{aligned}
+            \prod_{i=n}^m a_i&=\left(\prod_{i=n}^{k_0-1} a_i\right)\left(\prod_{j=k_0}^m a_j\right)\\
+            &=\left(\prod_{i=n}^{k_0-1} a_i\right)a_{k_0}\left(\prod_{j=k_0+1}^m a_j\right) \qquad \text{by \Cref{prod_split_from_start}}\\
+            &=\left(\prod_{i=n}^{k_0} a_i\right)\left(\prod_{j=k_0+1}^m a_j\right) \qquad \text{by definition of product notation.}
+        \end{aligned}
+    \end{equation*}
+    which contradicts the fact that $k_0\in S$, so $S$ must be empty and therefore for all $n\leq k<m$, $\prod_{i=n}^m a_i) = \left(\prod_{i=n}^{k} a_i\right) \left(\prod_{j=k+1}^m a_j\right)$
+\end{proof}
+
+\begin{lemma}[Re-Indexing of Products]\label{prod_re_index}
+    Given a sequence $\left\{a_i\right\}$ and indices $1\leq n\leq m$.
+    \begin{equation*}
+        \prod_{i=n}^m a_{i+1}=\prod_{i=n+1}^{m+1} a_i.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Consider the set $S=\left\{k \mid k\geq n \prod_{i=n}^k a_{i+1}\neq\prod_{i=n+1}^{k+1} a_i\right\}$. Suppose for the sake of contradiction that $S$ is not empty. By WOP, there exists a least element $k_0$. We know $k_0\neq n$ because $\prod_{i=n}^n a_{i+1}=a_{n+1}=\prod_{i=n+1}^{n+1} a_{n+1}$. Thus, $k_0-1\geq n$ and $k_0-1\notin S$ implies $\prod_{i=n}^{k_0-1} a_{i+1}=\prod_{i=n+1}^{k_0} a_i$. Multiplying both sides by $a_{k_0}$, 
+    \begin{equation*}
+        \begin{aligned}
+            \left(\prod_{i=n}^{k_0-1} a_{i+1}\right)a_{k_0}&=\left(\prod_{i=n+1}^{k_0}\right) a_{k_0}\\
+        \prod_{i=n}^{k_0} a_{i+1}&=\prod_{i=n+1}^{k_0+1}\\
+        \end{aligned}
+    \end{equation*}
+    which contradicts the fact that $k_0\in S$. As such, $S$ is empty and so $\prod_{i=n}^m a_{i+1}\neq\prod_{i=n+1}^{m}$ for $1\leq n\leq m$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Divisibility and GCD}
+\subsection{Division Algorithm}
+\begin{theorem}[Division Algorithm] \label{division_alg}
+    For all $a$, $b$ in $\ZZ$, and $b \neq 0$, there exists unique $q$, $r$ in $\ZZ$ such that
+    \[a=bq+r\]
+where $0 \leq r<q$.
+\end{theorem}
+\begin{proof} 
+    
+\end{proof}
+
+\begin{proof}
+    (\textit{Uniqueness}) Suppose there exists $q'$ and $r'$ such that
+    \begin{equation}
+        \begin{aligned}
+            a&=bq'+r'\\
+            a&=bq+r\\
+        \end{aligned}
+    \end{equation}
+    with $q'\neq q$, $r' \neq r$, and $r, r' \leq b$. Wlog, we may assume that $r' < r$, subtracting (4) from (5), we obtain the following
+    \begin{equation}
+        0=bq+r-(bq'+r')=b(q-q')+r-r'
+    \end{equation}
+    This implies that
+    \begin{equation}
+        b(q-q')=r'-r
+    \end{equation}
+    By definition \ref{divisor}, $b \mid (r'-r)$, by , this implies that $b\leq (r'-r)$. However, since $0 \leq r' \leq r \leq b$, $(r'-r) \leq (b-r)$, since $r \geq 0$, $(r'-r) \leq b$, which leads to a contradiction. Therefore, $r'=r$. We now have
+\begin{equation}
+    b(q-q')=0
+\end{equation}
+since $b>0$, $(q-q')=0$. This implies that $q=q'$, so the existence of $q$ and $r$ is unique.
+\end{proof}
+
+\subsection{GCD and Bezout}
+
+
+\begin{definition}[Greatest Common Divisor]\label{def_GCD}
+
+For all $a, b \in \ZZ^+ \setminus \{0\}$, consider the set 
+\begin{equation*}
+S = \{ x \mid x \mid a \text{ and } x \mid b ,\  x \in \ZZ^+ \},
+\end{equation*}
+the set of positive divisors of $a$ and $b$. If $n \in S$ such that for all $x\in S$, $n\geq x$, then we call $n$ the \text{"greatest common divisor"} of $a$ and $b$. We denote this as $n = \gcd(a, b)$.
+\end{definition}
+
+\begin{definition} [Coprime Integers]
+ For all $a, b \in \mathbb{Z}$, we say $a$ and $b$ are coprime or relatively prime if $\gcd(a, b) = 1$.
+\end{definition}
+
+
+\begin{theorem} [Greatest Common Divisor is Well-Defined] 
+ The greatest common divisor of two positive integers a,b is well-defined in the sense that $gcd(a,b)$ always exists and is always unique. 
+\end{theorem}
+
+\begin{proof}
+\noindent Since for all $x \in S$, $x\leq \min{(a,b)} $  by \Cref{a_div_b_then_a_leq_b}, we know $S$ is bounded above. Thus, by (\Cref{gen_wop}), there exists a maximum element $d$ in $S$, which by definition makes $d$ the GCD of $a$ and $b$. This shows existence of a GCD for any two positive integers. \\
+
+Now, we show the uniqueness of $d$. Suppose there exists $d' \in S$ such that $d'\neq d$, $d'$ is also the GCD of $a$ and $b$. Then, by definition of GCD (\Cref{def_GCD}), $d' \geq d$ and $d\geq d'$. Thus, $d'=d$, a contradiction. Therefore, no such $d'$ can exist, showing uniqueness.
+\end{proof}
+
+
+\begin{theorem} [Bezout's Identity] \label{Bezout}
+    Given $a$, $b$ in $\ZZ$ such that and $a$, $b$ are not simultaneously 0. Consider the set $S=\{ s=an+bm \in \ZZ^+ \mid n, m \in \ZZ\}$. The least element $d$ of $S$ is $\gcd(a, b)$.
+\end{theorem}
+
+\begin{proof}
+    Given that $a$ and $b$ are not zero, without loss of generality assume $a$ is the nonzero one. Then, if $a > 0$, we have $a \cdot 1 + b \cdot 0 = a \in \ZZ^+$, so $a \cdot 1 + b \cdot 0 \in S$. Otherwise, $a <0$, so $a \cdot (-1) + b \cdot 0 = (-a)$. Then, $(-a) \in \ZZ^+$, so $(-a) \ge 1 \ge 0$, and so $(-a) \in \ZZ^+$ and $a \cdot (-1) + b \cdot 0 \in S$. In both cases, $S$ is nonempty. Therefore, such a least element $d$ exists. 
+    
+     Now, we must show that $d \mid a$, $d \mid b$, then show $d = \text{gcd} (a,b)$. Since $d$ is in $S$, we can write $d = an + bm$, where $an$, $bn$ are in $\ZZ$. Then, since $d>0$, by \Cref{division_alg}, $a=dq+r$ for some $q_1, r_1 \in \ZZ$ with $0 \leq r_1 < d$. \\
+     
+     Assume $r_1 \neq 0$. Then, since $r_1 \ge 0$, we have $r_1 > 0$. Then, we have $r_1=a-dq_1$, and substituting $d = an + bm$ into this equation, we see:
+     
+     \begin{equation*}
+         r_1=a-(an + bm)q_1 = (1-nq_1)a-bq_1m = a(1-nq_1)+b(-q_1m).
+     \end{equation*}
+     
+     Since $r_1<d$, $r_1 > 0$ and $r_1 = am+bn$ for $m = 1-nq_1$, $n = -q_1m$, $r_1$ is an element of $S$ less than $d$, contradicting the minimality of $d$. Therefore, $r_1 = 0$, making $a=dq_1$. Then, by definition, $d \mid a$. Similarly, we see $d \mid b$. \\
+
+    Now consider the $e$ in $\ZZ^+$ such that $e \mid a$, $e \mid b$. Assume there is some $e$ such that $e > d$. By \Cref{linearity}, $e \mid (an+bm)$, so $e \mid d$. But by \Cref{a_div_b_then_a_leq_b}, $e \mid d$ implies that $e \leq d$. This is a contradiction, so for all common divisors of $a$ and $b$, $e\le d$. Therefore, by \Cref{def_GCD}, $d$ is the GCD of $a$ and $b$. 
+\end{proof}
+    
+\newpage
+\section{Unique Factorization}
+
+\subsection{Euclid's Lemma}
+\begin{lemma}[Prime Divisible by a Prime Implies Equality]\label{prime_div_prime}
+    Given $p,q$ are primes, then $p\mid q$ if and only if $p=q$.
+\end{lemma}
+\begin{proof} First, we show the if direction. If $p=q$, then $p=q\cdot 1$ by \Cref{mult-identity}, so $p\mid q$ by the definition of divisor (\Cref{divisor}). Now, the only if direction. If $p\mid q$, $p$ is a divisor of $q$. The only two divisors of $q$ are $1$ and $q$ by definition of prime (\Cref{def_prime}). $p\neq 1$ because $1$ is not prime, so $p=q$.
+\end{proof}
+
+\begin{lemma}[GCD of Primes is $p$ or $1$]\label{prime_coprime_with_nondiv_int}
+    Let $a$ be any positive integer and $a\nmid p$ where $p$ is prime, then $(a,p)=1$.
+\end{lemma}
+\begin{proof}
+    Recall the definition of GCD (\Cref{def_GCD}): the maximum element of the set $S = \{ x \mid x \mid a \text{ and } x \mid p ,\  x \in \ZZ^+ \}$ is $\gcd(a,p)$. Suppose $D_p$ denote the set of divisor of $p$, then $S\subseteq D_p$ because every element in $x\in S$ has $x\mid p$ which implies $x\mid p$. By the definition of prime (\Cref{def_prime}), $S\subseteq D_p=\left\{1,p\right\}$, so $\gcd(a,p)=1 \text{ or } p$. We know $p\nmid a$, so $p$ is the the GCD, which indicates $\gcd(a,p)=1$.
+\end{proof}
+
+\begin{theorem}[Fundamental Lemma]\label{coprime_imply_division}
+    If $a\mid bc$ and $(a,b)=1$, then $a\mid c$.
+\end{theorem}
+\begin{proof}
+    $a\mid bc$ means $bc=aq$ for some $q\in\ZZ$ by definition of divisor (\Cref{divisor}). By Bezout's identity (\Cref{Bezout}), $(a,b)=1$ implies there exists $x,y\in\ZZ$ such that $ax+by=1$. Multiplying both sides by $c$, 
+    \begin{equation*}
+        \begin{aligned}
+            cax+cby&=c\\
+            a(cx)+(aq)y&=c\\
+            a(cx+qy)&=c\\
+        \end{aligned}
+    \end{equation*}
+    which implies $a\mid c$ by definition of divisor (\Cref{divisor}).
+\end{proof}
+
+\begin{theorem}[Euclid's Lemma]\label{euclid-lemma}
+    If $p\mid ab$, then $p\mid a$ or $p\mid b$.
+\end{theorem}
+\begin{proof}
+    If $p\mid a$, we're done. If $p\nmid a$, then $(a,p)=1$ by \Cref{prime_coprime_with_nondiv_int}. Further, by \Cref{coprime_imply_division}, $p\mid ab$ and $(p,a)=1$ implies $p\mid b$. 
+\end{proof}
+
+\begin{theorem}[Extended Euclid's Lemma]\label{extended-euclid}
+    Given series $\left\{a_i\right\}$ and index $n\geq 1$ and prime $p$. If $p\mid \prod_{i=1}^n a_i$, then $p\mid a_j$ for some $1\leq j\leq n$. 
+\end{theorem}
+\begin{proof}
+    Define set $S=\left\{k \mid k\geq1, p\mid \prod_{i=1}^k a_i \right\}$. Because $p\mid \prod_{i=1}^n a_i$, we know $n\in S$ so $S$ is nonempty. By WOP, there exists a least element $k_0$ such that $p\mid \prod_{i=1}^{k_0} a_i$. 
+    
+    If $k_0=1$, then $p\mid\prod_{i=1}^{k_0} a_i=\prod_{i=1}^1=a_1$ by definition of product notation (\Cref{def_product_notation}), so $p\mid a_1$, and we're done. 
+
+    If $k_0\neq 1$, then $k_0-1\geq1$ and $k_0-1\notin S$ implies $p\nmid \prod_{i=1}^{k_0-1}$. By definition of product notation (\Cref{def_product_notation}), $\prod_{i=1}^{k_0} a_i=(\prod_{i=1}^{k_0-1} a_i) a_{k_0}$. Then, $p\mid \prod_{i=1}^{k_0} a_i=(\prod_{i=1}^{k_0-1} a_i) a_{k_0}$ and $p\nmid \prod_{i=1}^{k_0-1}$ implies $p\mid a_{k_0}$ by \Cref{euclid-lemma}.
+\end{proof}
+
+\subsection{Factorization}
+
+\begin{definition}[Ordered Prime Factorization]
+    An ordered prime factorization of $a>1$ is a ordered prime sequence $\{ p_i \}$ such that $a=\prod_{i=1}^n p_i$ for some $n\geq 1$.
+\end{definition}
+
+\begin{lemma}[Existence of Prime Factorization for Primes]\label{prime_factorization_exist_prime}
+    All prime integers $p$ have a prime factorization $\left\{p_i\right\}$, an ordered prime sequence of length one with $p_1=p$.
+\end{lemma}
+\begin{proof}
+    For any prime $p$, it follows $p=\prod_{i=1}^1 p$, so the prime factorization of any prime $p$ is the prime ordered sequence $\left\{a_i\right\}$ of length $1$ where $a_1=p$.
+\end{proof}
+
+\begin{lemma}\label{insert_and_order}
+    Given a finite ordered sequence $\{a_i\}$ with length $n$ over $\ZZ$ and integer $x$. There exists a ordered finite sequence $\{b_j\}$ of length $n+1$ such that for some $1\leq q\leq n$, we have $b_k=a_k$ for $1\leq k\leq q$ and $b_q=x$ and $b_{l+1}=a_l$ for $q\leq l\leq n$.
+\end{lemma}
+\begin{proof}
+    Define set $S=\left\{ i \mid a_i\geq x, 1\leq i\leq n\right\}$. If the set is empty, then $x$ is greater than all elements in $\left\{a_i\right\}$, so let $q=n+1$ and the series $\left\{b_j\right\}$ is $b_j=a_j$ for $1\leq j< q$ and $b_{q}=x$. Such sequence $\left\{b_j\right\}$ is ordered. 
+    
+    If the set is nonempty, then by WOP there exists a least element $s_0\in S$. Let $q=s_0+1$, and let $\left\{b_j\right\}$ be $b_j=a_j$ for $1\leq j<q$ and $b_q=x$ and $b_{l+1}=a_l$ for $q\leq l\leq n$. Such sequence $\left\{b_j\right\}$ is ordered.
+\end{proof}
+
+\begin{theorem}[Existence of Prime Factorization for all $n > 1$]\label{prime_factorization_exist_all}
+    All integers greater than 1 have a prime factorization.
+\end{theorem}
+\begin{proof}
+    Define set $S=\left\{ k\mid k\in\ZZ^+\setminus\left\{1\right\}, \nexists\prod_{i=1}^n p_i=k, \left\{p_i\right\} \text{ is a prime ordered sequence}  \right\}$. Suppose towards a contradiction that $S$ is nonempty. By WOP, there exists a least element $k_0\in S$. $k_0$ is not prime by \Cref{prime_factorization_exist_prime}, so $k_0$ is composite by \Cref{def_composite}, indicating there exist $p,x\in\ZZ^+$ where $p$ is prime and $k_0=px$ by lemma \Cref{every_has_prime_divisor}. By \Cref{a_div_b_then_a_leq_b}, $p,x\leq k_0$. We know $p\neq k_0$ because composite numbers are not prime and we know $x\neq k_0$ because $p=1$ is not prime, so $p,x<k_0$ which indicates $p,x\notin S$, and thus $p$ and $x$ have prime factorizations. Suppose $x=\prod_{i=1}^n a_i$ is the prime factorizations of $x$ where $\left\{a_i\right\}$ is a length $n$ prime ordered sequence. By lemma \ref{insert_and_order}, there exists an ordered finite sequence $\left\{b_j\right\}$ of length $n+1$ such that for some $1\leq q\leq n$, we have $b_k=a_k$ for $1\leq k\leq q$ and $b_q=x$ and $b_{l+1}=a_l$ for $q\leq l\leq n$. By commutativity of product, we have $\prod_j^{n+1} b_j=(\prod_i^n a_i)x=px=k_0$, so $\left\{b_j\right\}$ is a prime factorization for $k_0$, which contradicts with $k_0\in S$. Thus, we conclude $S$ is empty and all integers greater than $1$ have a prime factorization.
+\end{proof}
+
+\subsection{Proving UFT}
+
+\begin{theorem}\label{uft}
+(Fundamental Theorem of Arithmetic) For all $n \in \ZZ^+$, the positive ordered prime factorization of $n$ is unique: if $n = \prod_{i=1}^{n} p_i = \prod_{i=1}^m q_i$ for ordered sequences of positive primes $\{p_i\}$ and $\{q_i\}$, then $n = m$ and $p_i = q_i$ for all $i$. 
+\end{theorem}
+
+\begin{proof}
+Consider the set $T$ of $x \in \ZZ^+$ such that there exist ordered prime factorizations $\{ p_i \}$ and $\{ q_i \}$ such that there exists $n, m \in \mathbb{Z} $ where $x = \prod_{i=1}^{n} p_i = \prod_{i=1}^{m} q_i$ but $p_i \neq q_i$ for some $i \in \mathbf{Z}^+$. Assume this set is nonempty. Then, by Well-Ordering, there is a least element $t$ of this set. \\
+
+We have $t = \prod_{i=1}^{n} p_i = \prod_{i=1}^m q_i$ by assumption. Then, consider the first integer $k$ such that $p_k \neq q_k$ and let $j = k-1$. Such a $k$ exists since there is at least one such $i$ by assumption, and therefore by well-ordering there is a least such $i$. Then, we have $p_j = q_j$, and Applying \Cref{prod_split_from_middle} and \Cref{def_product_notation}, we have:
+
+\begin{align*}
+    t &= \left( \prod_{i=1}^{j} p_j \right) \cdot \left( \prod_{i=j}^{n} p_i \right) = \left( \prod_{i=1}^{j-1} p_i \right) \cdot p_j \cdot \left( \prod_{i=j+1}^{n} p_i \right) \\ &= \left( \prod_{i=1}^{j} q_i \right) \cdot \left( \prod_{i=j+1}^{m} q_i \right) = \left( \prod_{i=1}^{j-1} q_i \right) \cdot q_j \cdot \left( \prod_{i=j+1}^{m} q_j \right)
+\end{align*}
+
+
+Now, since every prime is nonzero by definition (\Cref{def_prime}), we write $t = p_j y$ for some $y \in \ZZ^+$ and see:
+
+\begin{equation*}
+    y = \left( \prod_{i=1}^{j-1} p_i \right)  \cdot \left( \prod_{i=j+1}^{n} p_i \right) = \left( \prod_{i=1}^{j-1} q_i \right) \cdot \left( \prod_{i=j+1}^{m} q_i \right)
+\end{equation*}
+
+Let $\{ a_i \}$ be the sequence defined by $a_i = p_{i+1}$ for all $i$ such that $1 \le i \le j-1$ and $b_i = p_{i+1}$ for $i > j-1$ and $\{ b_i \} $ be the sequence defined by $b_i = q_i$ for $i$ such that $1 \le i \le j-1$ and $b_i = q_{i+1}$ for $i > j-1$. \\
+
+Notice that if $i <k$ and $k \le j-1$, we have $a_i = p_i < p_k = a_k$. Also notice if $i < j$ where $i \le j-1$ and $j-1 < k$, we have $a_i = p_i < p_{k} < p_{k+1} = a_k$, and if $j-1 < i < k$, we have $a_i = p_{i+1} < p_{k+1} = a_k$, and similarly for each $b_i$ and $b_j$, showing $\{ a_i \}$ and $\{b_i\}$ are ordered sequences of positive primes. Furthermore, $a_j = p_{j+1} = p_k$ and $b_j = q_{j+1} = q_k$, so $a_j \neq b_j$ since $p_k \neq q_k$. Then, we have:
+
+\begin{equation*}
+    \prod_{i=1}^{n-1} a_i = \left( \prod_{i=1}^{j-1} a_i \right) \cdot \left( \prod_{i=j}^{n-1} a_i \right) = \left( \prod_{i=1}^{j-1} p_i \right) \cdot \left( \prod_{i=j}^{n-1} p_{i+1} \right) =  \left( \prod_{i=1}^{j-1} p_i \right) \cdot \left( \prod_{i=j+1}^{n} p_{i} \right),
+\end{equation*}
+
+by \Cref{prod_split_from_middle} and \Cref{prod_re_index}, and similarly we see:
+
+\begin{equation*}
+\prod_{i=1}^{m-1} b_i = \left( \prod_{i=1}^{j-1} a_i \right) \cdot \left( \prod_{i=j}^{m-1} a_i \right) = \left( \prod_{i=1}^{j-1} q_i \right) \cdot \left( \prod_{i=j}^{m-1} q_{i+1} \right) =  \left( \prod_{i=1}^{j-1} q_i \right) \cdot \left( \prod_{i=j+1}^{m} q_{i} \right),
+\end{equation*}
+
+implying:
+
+\begin{equation*}
+    y = \prod_{i=1}^{n-1} a_i = \prod_{i=1}^{m-1} b_i,
+\end{equation*}
+
+where $\{a_i\}$ and $\{b_i\}$ are ordered prime factorizations and $a_j \neq b_j$ for some $j \in \ZZ^+$. Therefore, $y \in \ZZ^+$ and $y \in T$. But, $y | t$, so $y < t$ by \Cref{a_div_b_then_a_leq_b}, contradicting the fact that $t$ was the least element of $T$. Therefore, our initial assumption that $T$ was nonempty is false and therefore $T$ must be empty, therefore showing that every integer has a unique prime factorization.
+\end{proof} 
+As such, the Fundamental Theorem of Arithmetic has been proven. $\mathbb{Q.E.D.}$
